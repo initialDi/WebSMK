@@ -20,6 +20,7 @@ class Login : AppCompatActivity() {
         val username1 : EditText = findViewById(R.id.username)
         val password1 : EditText = findViewById(R.id.password)
         val tmblogin:Button = findViewById(R.id.login)
+        val tmbsignup:Button = findViewById(R.id.signup)
 
         //cek apakah pengguna sudah login
         if (isLogedIn()){
@@ -43,6 +44,9 @@ class Login : AppCompatActivity() {
             }
         }
 
+        tmbsignup.setOnClickListener {
+            Toast.makeText(applicationContext,"Nanti dibuatkan dulu registernya",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun saveSesi(usnm : String){

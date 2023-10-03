@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         else{
             if (ketukduakali) {
                 super.onBackPressed()
+                finish()
                 return
             }
             this.ketukduakali = true

@@ -7,7 +7,7 @@
     tools:context=".Login">
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/ed_username"
         android:layout_width="234dp"
         android:layout_height="63dp"
         android:ems="10"
@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.892" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/ed_password"
         android:layout_width="225dp"
         android:layout_height="62dp"
         android:ems="10"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/btnlogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LOGIN"
@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.074" />
 
     <Button
-        android:id="@+id/signup"
+        android:id="@+id/btnsignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="195dp"

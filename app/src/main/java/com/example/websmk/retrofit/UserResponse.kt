@@ -17,9 +17,9 @@ class UserResponse {
         @Expose
         var nama :String? = null
 
-        @SerializedName("level")
+        @SerializedName("pw")
         @Expose
-        var level :String? = null
+        var pw :String? = null
 
     }
 }

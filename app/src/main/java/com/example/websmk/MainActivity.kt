@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val username = getSesiUsername()
-        Toast.makeText(applicationContext,"Selamat Datang $username!",Toast.LENGTH_SHORT).show()
+        val userId = getSesiUsername()
+        Toast.makeText(applicationContext,"Selamat Datang $userId!",Toast.LENGTH_SHORT).show()
 
         web = findViewById(R.id.web_smk)
         val fabLogout: FloatingActionButton = findViewById(R.id.fab_logout)
@@ -29,7 +29,10 @@ class MainActivity : AppCompatActivity() {
         val webSetting = web.settings
         webSetting.javaScriptEnabled = true
 
-        web.loadUrl("https://elearningsmkn2terbanggibesar.sch.id/")
+        // Mengirim data ke WebView menggunakan JavaScript
+        web.loadUrl("javascript:setUserId('" + userId + "')")
+
+        web.loadUrl("https://rinaldiihza.000webhostapp.com/includes/contoh.php?userId="+ userId)
 
         fabLogout.setOnClickListener {
             // Hapus sesi pengguna (logout)

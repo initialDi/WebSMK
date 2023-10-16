@@ -20,13 +20,15 @@ import com.example.websmk.retrofit.UserRequest
 class Login : AppCompatActivity() {
 
     val PREF_NAME = "MyAppPrefs"
+    private lateinit var username1:EditText
+    private lateinit var password1:EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val username1 : EditText = findViewById(R.id.ed_username)
-        val password1 : EditText = findViewById(R.id.ed_password)
+        username1 = findViewById(R.id.ed_username)
+        password1 = findViewById(R.id.ed_password)
         val tmblogin:Button = findViewById(R.id.btnlogin)
         val tmbsignup:Button = findViewById(R.id.btnsignup)
 
@@ -39,46 +41,49 @@ class Login : AppCompatActivity() {
         }
 
         tmblogin.setOnClickListener{
-
-            val request = UserRequest()
-            request.username = username1.text.toString().trim()
-            request.password = password1.text.toString().trim()
-
-            val retro = Retro().getRetroClientInstance().create(apiService::class.java)
-            retro.login(request).enqueue(object :Callback<UserResponse>{
-                override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-
-
-                    val petugas = response.body()
-
-                    if (petugas!=null) {
-                        Log.e("username", petugas!!.data?.username.toString())
-                        Log.e("nama", petugas!!.data?.nama.toString())
-
-                        // Simpan sesi atau lakukan tindakan lain sesuai kebutuhan Anda
-                        saveSesi(petugas!!.data?.username.toString())
-
-                        // Setelah berhasil login, jika Anda ingin langsung ke MainActivity, Anda dapat menggunakan Intent seperti berikut:
-                        val intentMain = Intent(this@Login, MainActivity::class.java)
-                        startActivity(intentMain)
-                        finish()
-                    }
-                    else{
-                        Toast.makeText(applicationContext,"Login Gagal",Toast.LENGTH_SHORT).show()
-                    }
-
-
-                }
-
-                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                    Log.e("errot", t.message.toString())
-                }
-
-            })
+            login()
         }
         tmbsignup.setOnClickListener {
-            Toast.makeText(applicationContext,"Nanti dibuatkan dulu registernya",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,"Silahkan Hubungi Adminstrator",Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun login(){
+        val request = UserRequest()
+        request.username = username1.text.toString().trim()
+        request.password = password1.text.toString().trim()
+
+        val retro = Retro().getRetroClientInstance().create(apiService::class.java)
+        retro.login(request).enqueue(object :Callback<UserResponse>{
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+
+
+                val petugas = response.body()
+
+                if (petugas!=null) {
+                    Log.e("username", petugas!!.data?.username.toString())
+                    Log.e("nama", petugas!!.data?.nama.toString())
+
+                    // Simpan sesi atau lakukan tindakan lain sesuai kebutuhan Anda
+                    saveSesi(petugas!!.data?.username.toString())
+
+                    // Setelah berhasil login, jika Anda ingin langsung ke MainActivity, Anda dapat menggunakan Intent seperti berikut:
+                    val intentMain = Intent(this@Login, MainActivity::class.java)
+                    startActivity(intentMain)
+                    finish()
+                }
+                else{
+                    Toast.makeText(applicationContext,"Login Gagal",Toast.LENGTH_SHORT).show()
+                }
+
+
+            }
+
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.e("errot", t.message.toString())
+            }
+
+        })
     }
 
     private fun saveSesi(usnm : String){
